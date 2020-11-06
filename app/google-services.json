@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "506662277782",
+    "firebase_url": "https://needtogo-e046e.firebaseio.com",
+    "project_id": "needtogo-e046e",
+    "storage_bucket": "needtogo-e046e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:506662277782:android:f0d4f7ea62ac24286568b7",
+        "android_client_info": {
+          "package_name": "com.example.needtogo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "506662277782-mqits5jj9qghge7ai6r1o7sbosu691v8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDwndMLZOueXSRjBqu9vaDzKhMfMc_w3ng"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "506662277782-mqits5jj9qghge7ai6r1o7sbosu691v8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
