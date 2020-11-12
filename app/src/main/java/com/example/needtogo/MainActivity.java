@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         signUp = findViewById(R.id.buttonSignUp);
 
         if (fAuth.getCurrentUser() != null) {
-            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+            startActivity(new Intent(getApplicationContext(), MapsActivity.class));
             finish();
         }
 
@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()){
                             makeText(MainActivity.this, "User created.", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(getApplicationContext(), MainPage.class));
+                            startActivity(new Intent(getApplicationContext(), MapsActivity.class));
                         }
                         else {
                             makeText(MainActivity.this, "Error ! " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()){
                             makeText(MainActivity.this, "Logged in successfully.", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(getApplicationContext(), MainPage.class));
+                            startActivity(new Intent(getApplicationContext(), MapsActivity.class));
                         }
                         else {
                             makeText(MainActivity.this, "Error ! " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
