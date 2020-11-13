@@ -35,14 +35,14 @@ public class MainActivity extends AppCompatActivity {
         signUp = findViewById(R.id.buttonSignUp);
 
         if (fAuth.getCurrentUser() != null) {
-            startActivity(new Intent(getApplicationContext(), MapsActivity.class));
+            startActivity(new Intent(getApplicationContext(), MainPage.class));
             finish();
         }
 
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String email = username.getText().toString().trim();
+                final String email = username.getText().toString().trim();
                 String pass = password.getText().toString().trim();
 
                 if (TextUtils.isEmpty(email)){
@@ -59,7 +59,11 @@ public class MainActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()){
                             makeText(MainActivity.this, "User created.", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(getApplicationContext(), MapsActivity.class));
+                            //If you want to pass the unique user to different activities
+//                            Intent intent = new Intent(getApplicationContext(), MainPage.class);
+//                            intent.putExtra("email", email);
+//                            startActivity(intent);
+                            startActivity(new Intent(getApplicationContext(), MainPage.class));
                         }
                         else {
                             makeText(MainActivity.this, "Error ! " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
@@ -72,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String email = username.getText().toString().trim();
+                final String email = username.getText().toString().trim();
                 String pass = password.getText().toString().trim();
 
                 if (TextUtils.isEmpty(email)){
@@ -89,7 +93,11 @@ public class MainActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()){
                             makeText(MainActivity.this, "Logged in successfully.", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(getApplicationContext(), MapsActivity.class));
+                            //If you want to pass the unique user to different activities
+//                            Intent intent = new Intent(getApplicationContext(), MainPage.class);
+//                            intent.putExtra("email", email);
+//                            startActivity(intent);
+                            startActivity(new Intent(getApplicationContext(), MainPage.class));
                         }
                         else {
                             makeText(MainActivity.this, "Error ! " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
