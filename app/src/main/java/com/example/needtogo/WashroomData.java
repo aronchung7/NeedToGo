@@ -22,16 +22,17 @@ import java.util.Map;
 
 import static android.widget.Toast.makeText;
 
-public class Add extends AppCompatActivity {
+public class WashroomData extends AppCompatActivity {
 
-    EditText name, address, description;
+    EditText name, address, city, country, description;
     RatingBar rating;
     Switch availability;
-    String val = "anonymous";
     Button btn;
 
-    public static final String NAME_KEY = "name";
+//    public static final String NAME_KEY = "name";
     public static final String ADDRESS_KEY = "address";
+    public static final String CITY_KEY = "city";
+    public static final String COUNTRY_KEY = "country";
     public static final String DESCRIPTION_KEY = "description";
     public static final String RATING_KEY = "rating";
     public static final String AVAILABILITY_KEY = "availability";
@@ -40,7 +41,7 @@ public class Add extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add);
+        setContentView(R.layout.activity_washroom_data);
 
         //If you want to pass the unique user to different activities
 //        Bundle extras = getIntent().getExtras();
@@ -55,12 +56,16 @@ public class Add extends AppCompatActivity {
             public void onClick(View v) {
                 name = findViewById(R.id.addName);
                 address = findViewById(R.id.addAddress);
+                city = findViewById(R.id.addCity);
+                country = findViewById(R.id.addCountry);
                 description = findViewById(R.id.addDescription);
                 availability = findViewById(R.id.switch1);
                 rating = findViewById(R.id.addRating);
 
                 String aName = name.getText().toString();
                 String aAddress = address.getText().toString();
+                String aCity = city.getText().toString();
+                String aCountry = country.getText().toString();
                 String aDescription = description.getText().toString();
                 final boolean aAvailability = availability.isChecked();
                 float aRating = rating.getRating();
@@ -72,7 +77,10 @@ public class Add extends AppCompatActivity {
                 mDocRef = FirebaseFirestore.getInstance().document("washrooms/"+aName);
 
                 Map<String, Object> data = new HashMap<>();
+//                data.put(NAME_KEY, aName);
                 data.put(ADDRESS_KEY, aAddress);
+                data.put(CITY_KEY, aCity);
+                data.put(COUNTRY_KEY, aCountry);
                 data.put(DESCRIPTION_KEY, aDescription);
                 data.put(AVAILABILITY_KEY, aAvailability);
                 data.put(RATING_KEY, aRating);
@@ -81,13 +89,15 @@ public class Add extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()){
-                            makeText(Add.this, "Data saved successfully.", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(getApplicationContext(), MainPage.class);
-                            intent.putExtra("email", val);
-                            startActivity(intent);
+                            makeText(WashroomData.this, "Data saved successfully.", Toast.LENGTH_SHORT).show();
+                            //If you want to pass the unique user to different activities
+//                            Intent intent = new Intent(getApplicationContext(), MainPage.class);
+//                            intent.putExtra("email", val);
+//                            startActivity(intent);
+                            startActivity(new Intent(getApplicationContext(), MainPage.class));
                         }
                         else {
-                            makeText(Add.this, "Error ! " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                            makeText(WashroomData.this, "Error ! " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     }
                 });

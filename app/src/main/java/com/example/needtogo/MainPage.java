@@ -4,9 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -33,7 +31,7 @@ public class MainPage extends AppCompatActivity {
 //            intent.putExtra("email", val);
 //            startActivity(intent);
 //        }
-        startActivity(new Intent(getApplicationContext(), Add.class));
+        startActivity(new Intent(getApplicationContext(), WashroomData.class));
     }
 
     public void logout(View view) {
