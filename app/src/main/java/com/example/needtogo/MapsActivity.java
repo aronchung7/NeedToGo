@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -32,7 +33,6 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
@@ -44,6 +44,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private LatLng currentLatLng;
 
     Button button;
+    Switch avail;
     Location currentLocation;
 
     FusedLocationProviderClient fusedLocationProviderClient;
@@ -60,6 +61,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         geocoder = new Geocoder(this);
         button = findViewById(R.id.washroomButton);
+        avail = findViewById(R.id.avail);
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -105,7 +107,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         MarkerOptions markerOptions = new MarkerOptions().position(currentLatLng);
         mMap.animateCamera(CameraUpdateFactory.newLatLng(currentLatLng));
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 13));
-//        mMap.addMarker(markerOptions);
     }
 
     @Override
@@ -138,9 +139,20 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                     .position(loc)
                                     .title(document.getId());
 
-                            //Restricted Radius of Nearby Locations of 1km
-                            if (getDistance(currentLocation.getLatitude(), currentLocation.getLongitude(), address.getLatitude(), address.getLongitude()) <= 1000.0) {
-                                mMap.addMarker(markerOptions);
+                            boolean availability = avail.isChecked();
+
+                            //Restricted Radius of Nearby Locations of 1km AND if washroom is available
+                            if (availability) {
+                                if (getDistance(currentLocation.getLatitude(), currentLocation.getLongitude(), address.getLatitude(), address.getLongitude()) <= 1000.0) {
+                                    if (document.getBoolean("availability") == true) {
+                                        mMap.addMarker(markerOptions);
+                                    }
+                                }
+                            }
+                            else {
+                                if (getDistance(currentLocation.getLatitude(), currentLocation.getLongitude(), address.getLatitude(), address.getLongitude()) <= 1000.0) {
+                                    mMap.addMarker(markerOptions);
+                                }
                             }
 
                             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 15));

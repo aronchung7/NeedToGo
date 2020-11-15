@@ -23,14 +23,13 @@
         android:layout_marginBottom="625dp"
         android:text="Find Nearest Washrooms" />
 
-    <RadioButton
-        android:id="@+id/radioButton"
+    <Switch
+        android:id="@+id/avail"
         android:layout_width="wrap_content"
-        android:layout_height="45dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginLeft="33dp"
-        android:layout_marginTop="662dp"
+        android:layout_marginLeft="34dp"
         android:layout_marginBottom="39dp"
         android:text="Available Only" />
 
