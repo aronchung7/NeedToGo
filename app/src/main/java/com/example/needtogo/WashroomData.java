@@ -13,6 +13,8 @@ import android.widget.Switch;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -27,7 +29,7 @@ public class WashroomData extends AppCompatActivity {
     EditText name, address, city, country, description;
     RatingBar rating;
     Switch availability;
-    Button btn;
+    Button btn, dBtn;
 
 //    public static final String NAME_KEY = "name";
     public static final String ADDRESS_KEY = "address";
@@ -37,6 +39,7 @@ public class WashroomData extends AppCompatActivity {
     public static final String RATING_KEY = "rating";
     public static final String AVAILABILITY_KEY = "availability";
     private DocumentReference mDocRef;
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,12 +53,14 @@ public class WashroomData extends AppCompatActivity {
 //        }
 
         btn = findViewById(R.id.addSubmitButton);
+        dBtn = findViewById(R.id.addDeleteButton);
+
+        name = findViewById(R.id.addName);
+        address = findViewById(R.id.addAddress);
 
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                name = findViewById(R.id.addName);
-                address = findViewById(R.id.addAddress);
                 city = findViewById(R.id.addCity);
                 country = findViewById(R.id.addCountry);
                 description = findViewById(R.id.addDescription);
@@ -101,6 +106,33 @@ public class WashroomData extends AppCompatActivity {
                         }
                     }
                 });
+            }
+        });
+
+        dBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String addName = name.getText().toString();
+                String addAddress = address.getText().toString();
+
+                if (addName.isEmpty() || addAddress.isEmpty()) {
+                    return;
+                }
+
+                db.collection("washrooms").document(addName).delete()
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            makeText(WashroomData.this, "Washroom Data Deleted.", Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(getApplicationContext(), MainPage.class));
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            makeText(WashroomData.this, "Error ! " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
             }
         });
     }
