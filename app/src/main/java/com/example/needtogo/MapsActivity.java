@@ -24,13 +24,16 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import android.content.Intent;
 
 import java.io.IOException;
 import java.util.List;
@@ -104,6 +107,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.setMyLocationEnabled(true);
 
         currentLatLng = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
+        try {
+            Thread.sleep(3000);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
         MarkerOptions markerOptions = new MarkerOptions().position(currentLatLng);
         mMap.animateCamera(CameraUpdateFactory.newLatLng(currentLatLng));
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 13));
@@ -125,13 +134,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
-                    for (QueryDocumentSnapshot document : task.getResult()) {
+                    for (final QueryDocumentSnapshot document : task.getResult()) {
                         try {
                             List<Address> addresses = geocoder.getFromLocationName(document.getString("address")
-                                    + " "
-                                    + document.getString("city")
-                                    + " "
-                                    + document.getString("country"),
+                                            + " "
+                                            + document.getString("city")
+                                            + " "
+                                            + document.getString("country"),
                                     1);
                             Address address = addresses.get(0);
                             LatLng loc = new LatLng(address.getLatitude(), address.getLongitude());
@@ -145,17 +154,28 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                             if (availability) {
                                 if (getDistance(currentLocation.getLatitude(), currentLocation.getLongitude(), address.getLatitude(), address.getLongitude()) <= 1000.0) {
                                     if (document.getBoolean("availability") == true) {
-                                        mMap.addMarker(markerOptions);
+                                        mMap.addMarker(markerOptions).setTag(document.getReference().getPath());
                                     }
                                 }
                             }
                             else {
                                 if (getDistance(currentLocation.getLatitude(), currentLocation.getLongitude(), address.getLatitude(), address.getLongitude()) <= 1000.0) {
-                                    mMap.addMarker(markerOptions);
+                                    mMap.addMarker(markerOptions).setTag(document.getReference().getPath());
                                 }
                             }
 
                             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 15));
+
+                            mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener(){
+
+                                @Override
+                                public boolean onMarkerClick(Marker marker){
+                                    Intent intent = new Intent(getApplicationContext(), DetailsActivity.class);
+                                    intent.putExtra("document", marker.getTag().toString());
+                                    startActivity(intent);
+                                    return false;
+                                };
+                            });
 
                         } catch (IOException e) {
                             e.printStackTrace();
