@@ -2,13 +2,14 @@ package com.example.needtogo;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import android.content.Intent;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.os.Bundle;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -20,7 +21,7 @@ import static android.widget.Toast.makeText;
 
 public class MainActivity extends AppCompatActivity {
     EditText username, password;
-    Button login, signUp;
+    CardView login, signUp;
     FirebaseAuth fAuth;
 
     @Override
