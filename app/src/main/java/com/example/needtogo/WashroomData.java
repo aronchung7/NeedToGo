@@ -46,12 +46,6 @@ public class WashroomData extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_washroom_data);
 
-        //If you want to pass the unique user to different activities
-//        Bundle extras = getIntent().getExtras();
-//        if (extras != null) {
-//            val = extras.getString("email");
-//        }
-
         btn = findViewById(R.id.addSubmitButton);
         dBtn = findViewById(R.id.addDeleteButton);
 
@@ -95,10 +89,6 @@ public class WashroomData extends AppCompatActivity {
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()){
                             makeText(WashroomData.this, "Data saved successfully.", Toast.LENGTH_SHORT).show();
-                            //If you want to pass the unique user to different activities
-//                            Intent intent = new Intent(getApplicationContext(), MainPage.class);
-//                            intent.putExtra("email", val);
-//                            startActivity(intent);
                             startActivity(new Intent(getApplicationContext(), MainPage.class));
                         }
                         else {

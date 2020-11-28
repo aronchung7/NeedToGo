@@ -23,15 +23,11 @@ public class MainPage extends AppCompatActivity {
     }
 
     public void add(View view) {
-        //If you want to pass the unique user to different activities
-//        Bundle extras = getIntent().getExtras();
-//        if (extras != null) {
-//            String val = extras.getString("email");
-//            Intent intent = new Intent(getApplicationContext(), Add.class);
-//            intent.putExtra("email", val);
-//            startActivity(intent);
-//        }
         startActivity(new Intent(getApplicationContext(), WashroomData.class));
+    }
+
+    public void info(View view) {
+        startActivity(new Intent(getApplicationContext(), Information.class));
     }
 
     public void logout(View view) {

@@ -60,10 +60,6 @@ public class MainActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()){
                             makeText(MainActivity.this, "User created.", Toast.LENGTH_SHORT).show();
-                            //If you want to pass the unique user to different activities
-//                            Intent intent = new Intent(getApplicationContext(), MainPage.class);
-//                            intent.putExtra("email", email);
-//                            startActivity(intent);
                             startActivity(new Intent(getApplicationContext(), MainPage.class));
                         }
                         else {
@@ -94,10 +90,6 @@ public class MainActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()){
                             makeText(MainActivity.this, "Logged in successfully.", Toast.LENGTH_SHORT).show();
-                            //If you want to pass the unique user to different activities
-//                            Intent intent = new Intent(getApplicationContext(), MainPage.class);
-//                            intent.putExtra("email", email);
-//                            startActivity(intent);
                             startActivity(new Intent(getApplicationContext(), MainPage.class));
                         }
                         else {
