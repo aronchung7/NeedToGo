@@ -1,6 +1,7 @@
 package com.example.needtogo;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentActivity;
 
@@ -22,6 +23,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Marker;
@@ -46,7 +48,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private Geocoder geocoder;
     private LatLng currentLatLng;
 
-    Button button;
+    CardView button;
     Switch avail;
     Location currentLocation;
 
@@ -146,7 +148,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                             LatLng loc = new LatLng(address.getLatitude(), address.getLongitude());
                             MarkerOptions markerOptions = new MarkerOptions()
                                     .position(loc)
-                                    .title(document.getId());
+                                    .title(document.getId()).icon(BitmapDescriptorFactory.defaultMarker(174));
 
                             boolean availability = avail.isChecked();
 
@@ -192,5 +194,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public double getDistance(double LAT1, double LONG1, double LAT2, double LONG2) {
         double distance = 2 * 6371000 * Math.asin(Math.sqrt(Math.pow((Math.sin((LAT2 * (3.14159 / 180) - LAT1 * (3.14159 / 180)) / 2)), 2) + Math.cos(LAT2 * (3.14159 / 180)) * Math.cos(LAT1 * (3.14159 / 180)) * Math.sin(Math.pow(((LONG2 * (3.14159 / 180) - LONG1 * (3.14159 / 180)) / 2), 2))));
         return distance;
+    }
+
+    public void home(View view) {
+        startActivity(new Intent(getApplicationContext(), MainPage.class));
     }
 }
