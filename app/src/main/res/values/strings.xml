@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">NeedToGo</string>
     <string name="title_activity_maps">Map</string>
-    <string name="Add_Title">Register or Update a Washroom</string>
+    <string name="Add_Title">Add, Update, or Delete a Washroom</string>
 </resources>

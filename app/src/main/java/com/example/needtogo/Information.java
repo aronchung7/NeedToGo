@@ -1,7 +1,6 @@
 package com.example.needtogo;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 
 public class Information extends AppCompatActivity {

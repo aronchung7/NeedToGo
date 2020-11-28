@@ -2,6 +2,7 @@ package com.example.needtogo;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -29,7 +30,7 @@ public class WashroomData extends AppCompatActivity {
     EditText name, address, city, country, description;
     RatingBar rating;
     Switch availability;
-    Button btn, dBtn;
+    CardView btn, dBtn;
 
 //    public static final String NAME_KEY = "name";
     public static final String ADDRESS_KEY = "address";
@@ -125,5 +126,9 @@ public class WashroomData extends AppCompatActivity {
                     });
             }
         });
+    }
+
+    public void home(View view) {
+        startActivity(new Intent(getApplicationContext(), MainPage.class));
     }
 }
