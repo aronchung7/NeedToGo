@@ -2,4 +2,6 @@
     <string name="app_name">NeedToGo</string>
     <string name="title_activity_maps">Map</string>
     <string name="Add_Title">Add, Update, or Delete a Washroom</string>
+    <string name="app_info">During these COVID times many are searching for usable washrooms but fail to reach their needs. <br />After many times trying to look for a open store to use their washroom it will be already too late. <br />This app collects data about which nearby washrooms are open and also collects data on the cleanliness of the facility. <br />Therefore, users are able to pick and choose the best washrooms around them.</string>
+    <string name="team"><b>NeedToGo was created by: </b><br />Aron Chung and Andrew Lee<br /><br /><b>Our group name is:</b> <br />Sorry Jungsoo</string>
 </resources>

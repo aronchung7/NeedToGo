@@ -1,9 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/gradient"
     tools:context=".Information">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginLeft="30dp">
+
+            <TextView
+                android:text="App Information"
+                android:id="@+id/washroomTxt"
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="28sp"
+                android:textColor="#fff">
+            </TextView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/washroomTxt"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:text="Information about the app."
+                android:textColor="@color/colorAccent"
+                android:textSize="14sp"
+                android:textStyle="italic">
+            </TextView>
+            <ImageView
+                android:onClick="home"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="10dp"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/home">
+            </ImageView>
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/txt1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/relativeLayout"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="60dp"
+            android:layout_marginRight="30dp"
+            android:text="During these COVID times many are searching for usable washrooms but fail to reach their needs. \nAfter many times trying to look for a open store to use their washroom it will be already too late. \nThis app collects data about which nearby washrooms are open and also collects data on the cleanliness of the facility. \nTherefore, users are able to pick and choose the best washrooms around them."
+            android:textAlignment="center"
+            android:textColor="#fff"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/txt2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_below="@id/txt1"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginRight="30dp"
+            android:text="NeedToGo was created by: \nAron Chung and Andrew Lee\n\nOur group name is: \nSorry Jungsoo"
+            android:textAlignment="center"
+            android:textColor="#fff"
+            android:textSize="15dp" />
+    </LinearLayout>
+</ScrollView>
